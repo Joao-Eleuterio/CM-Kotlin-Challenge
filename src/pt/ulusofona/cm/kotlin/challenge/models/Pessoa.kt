@@ -18,16 +18,12 @@ class Pessoa(var nome: String, var dataDeNascimento: Date) : Movimentavel {
     }
 
     fun pesquisarVeiculo(identificador: String): Veiculo {
-        try {
             for (veiculos in veiculo) {
                 if (veiculos.identificador == identificador) {
                     return veiculos
                 }
             }
             throw VeiculoNaoEncontradoException("")
-        } catch (_: VeiculoNaoEncontradoException) {
-        }
-        return TODO("Provide the return value")
     }
 
     fun venderVeiculo(identificador: String, comprador: Pessoa) {
