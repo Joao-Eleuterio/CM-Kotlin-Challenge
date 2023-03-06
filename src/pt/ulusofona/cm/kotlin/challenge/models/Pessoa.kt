@@ -14,13 +14,13 @@ class Pessoa(var nome: String, var dataDeNascimento: Date) :Movimentavel{
         this.veiculo.last().dataDeAquisicao = Date()
     }
 
-    fun pesquisarVeiculo(identificador: String): Veiculo? {
+    fun pesquisarVeiculo(identificador: String): Veiculo {
         for (veiculos in veiculo) {
             if (veiculos.identificador == identificador) {
                 return veiculos
             }
         }
-        return null
+        return throw VeiculoNaoEncontradoException("")
     }
 
     fun venderVeiculo(identificador: String, comprador: Pessoa) {
@@ -32,19 +32,27 @@ class Pessoa(var nome: String, var dataDeNascimento: Date) :Movimentavel{
 
     fun moverVeiculoPara(identificador: String, x: Int, y: Int) {
         val veiculo = pesquisarVeiculo(identificador)
-        veiculo?.moverPara(x,y)
+        veiculo.moverPara(x,y)
     }
     fun temCarta(): Boolean {
-        return carta != null
+        if (carta) {
+            return true
+        }
+        throw PessoaSemCartaException("$nome não tem carta para conduzir o veículo indicado")
     }
 
     fun tirarCarta() {
-        if(dataDeNascimento.year-Date().year>= 18)
-            this.carta= Carta()
+        if(dataDeNascimento.year-Date().year>= 18) {
+            this.carta = Carta()
+        }else{
+           throw MenorDeIdadeException("")
+        }
+
     }
 
     override fun moverPara(x: Int, y: Int) {
         super.moverPara(x, y)
+        if(this.x=x && this.y=y){ throw AlterarPosicaoException("")}
         posicao.alterarPosicaoPara(x,y)
     }
 

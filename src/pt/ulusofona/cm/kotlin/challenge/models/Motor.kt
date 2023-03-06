@@ -7,8 +7,9 @@ class Motor(var cavalos:Int,var cilindrada:Int):Ligavel{
 
 
     override fun desligar() {
-        super.desligar()
-        ligado=false;
+        if(ligado){
+            ligado=false;
+        }else{throw VeiculoDesligadoException("")}
     }
 
     override fun estaLigado() {
@@ -17,8 +18,8 @@ class Motor(var cavalos:Int,var cilindrada:Int):Ligavel{
     }
 
     override fun ligar() {
-        super.ligar()
-        ligado= true
+        if(!ligado){
+        ligado= true}else{throw VeiculoLigadoException("")}
     }
 
     override fun toString(): String {
