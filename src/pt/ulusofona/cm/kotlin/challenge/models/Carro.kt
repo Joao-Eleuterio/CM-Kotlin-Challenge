@@ -4,7 +4,7 @@ import pt.ulusofona.cm.kotlin.challenge.exceptions.AlterarPosicaoException
 import java.util.*
 
 class Carro(override var identificador:String, val motor:Motor) : Veiculo(identificador){
-    override lateinit var dataDeAquisicao: Date
+    override var dataDeAquisicao = Date()
 
     override fun requerCarta(): Boolean {
         return true
