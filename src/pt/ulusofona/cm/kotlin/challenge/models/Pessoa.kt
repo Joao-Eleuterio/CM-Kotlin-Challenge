@@ -46,7 +46,6 @@ class Pessoa(var nome: String, var dataDeNascimento: Date) : Movimentavel {
     }
 
     fun tirarCarta() {
-
             if (dataDeNascimento.year - Date().year >= 18) {
                 this.carta = Carta()
             } else {
