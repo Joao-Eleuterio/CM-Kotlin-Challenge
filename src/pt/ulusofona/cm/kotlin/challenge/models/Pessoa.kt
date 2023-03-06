@@ -6,7 +6,7 @@ import java.util.*
 
 class Pessoa(var nome: String, var dataDeNascimento: Date) :Movimentavel{
     var veiculo = listOf<Veiculo>()
-    var carta : Carta? = null
+    var carta : Carta = null
     var posicao = Posicao(0, 0)
 
     fun comprarVeiculo(veiculo: Veiculo) {
@@ -52,8 +52,8 @@ class Pessoa(var nome: String, var dataDeNascimento: Date) :Movimentavel{
 
     override fun moverPara(x: Int, y: Int) {
         super.moverPara(x, y)
-        if(this.x=x && this.y=y){ throw AlterarPosicaoException("")}
-        posicao.alterarPosicaoPara(x,y)
+        if(this.x=x && this.y=y){ throw AlterarPosicaoException("")}else{
+        posicao.alterarPosicaoPara(x,y)}
     }
 
 }

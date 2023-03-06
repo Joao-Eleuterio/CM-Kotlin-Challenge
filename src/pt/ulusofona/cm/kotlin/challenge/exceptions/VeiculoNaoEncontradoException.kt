@@ -1,3 +1,3 @@
 package pt.ulusofona.cm.kotlin.challenge.exceptions
 
-class VeiculoNaoEncontradoException : Exception(message)
+class VeiculoNaoEncontradoException(message:String) : Exception(message)
