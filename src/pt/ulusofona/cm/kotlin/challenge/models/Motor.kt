@@ -1,5 +1,5 @@
 package pt.ulusofona.cm.kotlin.challenge.models
-
+import pt.ulusofona.cm.kotlin.challenge.exceptions
 import pt.ulusofona.cm.kotlin.challenge.interfaces.Ligavel
 
 class Motor(var cavalos: Int, var cilindrada: Int) : Ligavel {
@@ -7,10 +7,14 @@ class Motor(var cavalos: Int, var cilindrada: Int) : Ligavel {
 
 
     override fun desligar() {
-        if (ligado) {
-            ligado = false;
-        } else {
-            throw VeiculoDesligadoException("")
+        try {
+            if (ligado) {
+                ligado = false;
+            } else {
+                throw VeiculoDesligadoException("aaa")
+            }
+        } catch (e: VeiculoDesligadoException) {
+            // handle the exception here
         }
     }
 
@@ -20,11 +24,13 @@ class Motor(var cavalos: Int, var cilindrada: Int) : Ligavel {
     }
 
     override fun ligar() {
-        if (!ligado) {
-            ligado = true
-        } else {
-            throw VeiculoLigadoException("")
-        }
+        try {
+            if (!ligado) {
+                ligado = true
+            } else {
+                throw VeiculoLigadoException("")
+            }
+        }catch (e: VeiculoLigadoException){}
     }
 
     override fun toString(): String {

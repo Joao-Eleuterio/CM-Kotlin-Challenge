@@ -6,7 +6,7 @@ import java.util.*
 
 class Pessoa(var nome: String, var dataDeNascimento: Date) :Movimentavel{
     var veiculo = listOf<Veiculo>()
-    var carta : Carta = null
+    var carta : Carta
     var posicao = Posicao(0, 0)
 
     fun comprarVeiculo(veiculo: Veiculo) {
@@ -15,12 +15,16 @@ class Pessoa(var nome: String, var dataDeNascimento: Date) :Movimentavel{
     }
 
     fun pesquisarVeiculo(identificador: String): Veiculo {
-        for (veiculos in veiculo) {
-            if (veiculos.identificador == identificador) {
-                return veiculos
+        try {
+
+
+            for (veiculos in veiculo) {
+                if (veiculos.identificador == identificador) {
+                    return veiculos
+                }
             }
-        }
-        return throw VeiculoNaoEncontradoException("")
+            return throw VeiculoNaoEncontradoException("")
+        }catch (e:VeiculoNaoEncontradoException){}
     }
 
     fun venderVeiculo(identificador: String, comprador: Pessoa) {
@@ -35,25 +39,30 @@ class Pessoa(var nome: String, var dataDeNascimento: Date) :Movimentavel{
         veiculo.moverPara(x,y)
     }
     fun temCarta(): Boolean {
-        if (carta) {
-            return true
-        }
-        throw PessoaSemCartaException("$nome não tem carta para conduzir o veículo indicado")
+        try {
+            if (carta) {
+                return true
+            }
+            throw PessoaSemCartaException("$nome não tem carta para conduzir o veículo indicado")
+        }catch (e:PessoaSemCartaException){}
     }
 
     fun tirarCarta() {
-        if(dataDeNascimento.year-Date().year>= 18) {
-            this.carta = Carta()
-        }else{
-           throw MenorDeIdadeException("")
-        }
+        try {
+            if (dataDeNascimento.year - Date().year >= 18) {
+                this.carta = Carta()
+            } else {
+                throw MenorDeIdadeException("")
+            }
+        }catch (e:MenorDeIdadeException){}
 
     }
 
     override fun moverPara(x: Int, y: Int) {
-        super.moverPara(x, y)
+        try{
         if(this.x=x && this.y=y){ throw AlterarPosicaoException("")}else{
-        posicao.alterarPosicaoPara(x,y)}
+        posicao.alterarPosicaoPara(x,y)}}
+        catch (e:AlterarPosicaoException){}
     }
 
 }
