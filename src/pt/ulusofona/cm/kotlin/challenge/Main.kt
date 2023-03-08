@@ -18,7 +18,7 @@ fun main() {
     }catch (e: MenorDeIdadeException){
        print(e.message)
     }
-    pessoa.veiculo
+
 
     print(carro.posicao.x)
     print(carro.posicao.y)
