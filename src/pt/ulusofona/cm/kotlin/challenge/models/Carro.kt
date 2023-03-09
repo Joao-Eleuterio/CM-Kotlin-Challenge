@@ -1,10 +1,10 @@
 package pt.ulusofona.cm.kotlin.challenge.models
 
 import pt.ulusofona.cm.kotlin.challenge.exceptions.AlterarPosicaoException
-import java.util.*
+import java.time.LocalDate
 
 class Carro(override var identificador:String, var motor:Motor) : Veiculo(identificador){
-    override var dataDeAquisicao = Date()
+    override lateinit var dataDeAquisicao : LocalDate
 
     override fun requerCarta(): Boolean {
         return true

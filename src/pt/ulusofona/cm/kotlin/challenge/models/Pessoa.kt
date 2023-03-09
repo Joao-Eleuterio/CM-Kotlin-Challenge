@@ -4,16 +4,17 @@ import pt.ulusofona.cm.kotlin.challenge.exceptions.MenorDeIdadeException
 import pt.ulusofona.cm.kotlin.challenge.exceptions.PessoaSemCartaException
 import pt.ulusofona.cm.kotlin.challenge.exceptions.VeiculoNaoEncontradoException
 import pt.ulusofona.cm.kotlin.challenge.interfaces.Movimentavel
-import java.util.*
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
-class Pessoa(var nome: String, var dataDeNascimento: Date) : Movimentavel {
+class Pessoa(var nome: String, var dataDeNascimento: LocalDate) : Movimentavel {
     var veiculos : List<Veiculo> = listOf()
     lateinit var carta: Carta
     var posicao = Posicao(0, 0)
 
     fun comprarVeiculo(veiculo: Veiculo) {
         this.veiculos += veiculo
-        this.veiculos.last().dataDeAquisicao = Date()
+        this.veiculos.last().dataDeAquisicao = LocalDate.now()
 
     }
 
@@ -29,7 +30,7 @@ class Pessoa(var nome: String, var dataDeNascimento: Date) : Movimentavel {
     fun venderVeiculo(identificador: String, comprador: Pessoa) {
             val veiculo = pesquisarVeiculo(identificador)
             comprador.comprarVeiculo(veiculo)
-            comprador.veiculos.last().dataDeAquisicao = Date()
+            comprador.veiculos.last().dataDeAquisicao = LocalDate.now()
             this.veiculos -= veiculo
 
     }
@@ -47,7 +48,7 @@ class Pessoa(var nome: String, var dataDeNascimento: Date) : Movimentavel {
     }
 
     fun tirarCarta() {
-            if (dataDeNascimento.year - Date().year >= 18 && !temCarta()) {
+            if (dataDeNascimento.year - LocalDate.now().year >= 18 && !temCarta()) {
                 this.carta = Carta()
             } else {
                 throw MenorDeIdadeException("Não pode tirar a carta" )
@@ -63,7 +64,9 @@ class Pessoa(var nome: String, var dataDeNascimento: Date) : Movimentavel {
     }
 
     override fun toString(): String {
-        return "Pessoa | $nome | $dataDeNascimento | Posicao | x:${posicao.x} | y:${posicao.y}"
+        val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
+        val data = dataDeNascimento.format(formatter)
+        return "Pessoa | $nome | $data | Posicao | x:${posicao.x} | y:${posicao.y}"
     }
 
 }
