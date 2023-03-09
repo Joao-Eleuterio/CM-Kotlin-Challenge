@@ -9,7 +9,7 @@ import java.time.LocalDate
 fun main() {
     // aqui escreves o código do programa
 
- val carro = Carro("aabbcc", Motor(90,90))
+/* val carro = Carro("aabbcc", Motor(90,90))
     val pessoa = Pessoa("aaa", LocalDate.now())
     pessoa.comprarVeiculo(carro)
     val pessoa1 = Pessoa("bbb", LocalDate.now())
@@ -22,6 +22,6 @@ fun main() {
 
 
     print(carro)
-    print(carro.posicao.y)
+    print(carro.posicao.y)*/
 }
     
