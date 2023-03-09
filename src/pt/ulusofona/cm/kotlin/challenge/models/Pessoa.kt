@@ -67,7 +67,7 @@ class Pessoa(var nome: String, var dataDeNascimento: Date) : Movimentavel {
     override fun toString(): String {
         val formato = SimpleDateFormat("dd-MM-yyyy")
         val data = formato.format(dataDeNascimento)
-        return "Pessoa | $nome | $data | Posicao | x:${posicao.x} | y:${posicao.y}"
+        return "Pessoa | " + nome + " | " + data + " | Posicao | x:" + posicao.x + " | y:" + posicao.y
     }
 
 }

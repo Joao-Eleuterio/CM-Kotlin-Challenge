@@ -12,7 +12,7 @@ abstract class Veiculo(open var identificador: String) : Movimentavel{
     override fun toString(): String {
         val formato = SimpleDateFormat("dd-MM-yyyy")
         val data = formato.format(dataDeAquisicao)
-        return "${this.javaClass.simpleName} | $identificador | $data | $posicao | x:${posicao.x} | y:${posicao.y} "
+        return this.javaClass.simpleName.toString() + " | " + identificador + " | " + data + " | " + posicao + " | x:" + posicao.x + " | y:" + posicao.y
     }
 }
 
