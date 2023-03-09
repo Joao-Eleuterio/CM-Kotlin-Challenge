@@ -4,7 +4,7 @@ import pt.ulusofona.cm.kotlin.challenge.exceptions.AlterarPosicaoException
 import java.time.LocalDate
 
 class Bicicleta(identificador:String) : Veiculo(identificador) {
-    override lateinit var dataDeAquisicao: LocalDate
+    override lateinit var dataDeAquisicao: Date
 
 
 
