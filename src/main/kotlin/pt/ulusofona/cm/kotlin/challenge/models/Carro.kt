@@ -35,12 +35,14 @@ class Carro(override var identificador:String, var motor:Motor) : Veiculo(identi
     }
 
     override fun moverPara(x: Int, y: Int) {
-        if (posicao.x == x && posicao.y == y) {
+        if (posicao.x == x && posicao.y == y || !estaLigado()) {
             throw AlterarPosicaoException("Não pode ir para a mesma posicao")
         } else {
+            ligar()
             motor.ligar()
             posicao.alterarPosicaoPara(x, y)
             motor.desligar()
+            desligar()
         }
 
     }

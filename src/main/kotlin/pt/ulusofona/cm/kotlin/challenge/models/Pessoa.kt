@@ -20,9 +20,9 @@ class Pessoa(var nome: String, var dataDeNascimento: Date) : Movimentavel {
     }
 
     fun pesquisarVeiculo(identificador: String): Veiculo {
-            for (veiculos in veiculos) {
-                if (veiculos.identificador == identificador) {
-                    return veiculos
+            for (veiculo in veiculos) {
+                if (veiculo.identificador == identificador) {
+                    return veiculo
                 }
             }
             throw VeiculoNaoEncontradoException("Não exite o veiculo com o identificador: $identificador")
@@ -38,6 +38,9 @@ class Pessoa(var nome: String, var dataDeNascimento: Date) : Movimentavel {
 
     fun moverVeiculoPara(identificador: String, x: Int, y: Int) {
         val veiculo = pesquisarVeiculo(identificador)
+        if(veiculo.requerCarta() && !temCarta()){
+            throw AlterarPosicaoException("Não pode")
+        }
         veiculo.moverPara(x, y)
     }
 
