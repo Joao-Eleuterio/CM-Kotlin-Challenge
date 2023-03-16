@@ -38,7 +38,7 @@ class Pessoa(var nome: String, var dataDeNascimento: Date) : Movimentavel {
     fun moverVeiculoPara(identificador: String, x: Int, y: Int) {
         val veiculo = pesquisarVeiculo(identificador)
         if(veiculo.requerCarta() && !temCarta()){
-            throw AlterarPosicaoException("Não pode")
+            throw PessoaSemCartaException("$nome não tem carta para o fazer" )
         }
         veiculo.moverPara(x, y)
     }
@@ -47,7 +47,7 @@ class Pessoa(var nome: String, var dataDeNascimento: Date) : Movimentavel {
             if (this::carta.isInitialized && carta.javaClass.simpleName == Carta().javaClass.simpleName) {
                 return true
             }
-        throw PessoaSemCartaException("$nome não tem carta para conduzir o veículo indicado")
+        return false
     }
 
     fun tirarCarta() {
@@ -57,7 +57,7 @@ class Pessoa(var nome: String, var dataDeNascimento: Date) : Movimentavel {
             if (age>=18) {
                 this.carta = Carta()
             } else {
-                throw MenorDeIdadeException("Não pode tirar a carta" )
+                throw MenorDeIdadeException("$nome é menor de idade" )
             }
     }
 
