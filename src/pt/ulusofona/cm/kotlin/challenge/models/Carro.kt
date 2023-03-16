@@ -32,11 +32,11 @@ class Carro(override var identificador:String,var motor:Motor) : Veiculo(identif
     }
 
     override fun moverPara(x: Int, y: Int) {
-        if ((posicao.x == x && posicao.y == y)) {
+        if (posicao.x == x && posicao.y == y) {
             throw AlterarPosicaoException("${this.javaClass.simpleName} não pode ir para a mesma posicao")
         } else {
-            posicao.alterarPosicaoPara(x, y)
             if(estaLigado()){
+                posicao.alterarPosicaoPara(x, y)
                 desligar()
             }
         }
